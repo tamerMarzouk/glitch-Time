@@ -26,9 +26,16 @@ app.get("/api/hello", function (req, res) {
 
 //timestamp
 app.get("/api/timestamp/:date",(req,res)=>{
+  let dateStr=req.params.date;
+   let mydate=null;
+  if(dateStr.indexOf('-')>=0){
+    mydate=new Date(req.params.date);
+  }else{
+    mydate=new Date(parseInt(dateStr)*1000);
+  }
   
-  let mydate=new Date(req.params.date);
-  console.log(mydate)
+ 
+  console.log(mydate,new Date(parseInt(dateStr)*1000))
   res.send({unix:Math.floor(mydate.getTime()/1000),utc:mydate})
 })
 
